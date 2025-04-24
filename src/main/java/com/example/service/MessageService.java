@@ -16,21 +16,31 @@ public class MessageService {
     }
 
     public Message createNewMessage(Message m) {
-        return null;
+        return messageRepository.save(m);
     }
     public List<Message> getAllMessages() {
-        return null;
+        return messageRepository.findAll();
     }
     public Message getMessageWithId(int id) {
+        return messageRepository.getById(id);
+    }
+    public Integer deleteMessageWithId(int id) {
+        if (messageRepository.existsById(id)) {
+            messageRepository.deleteById(id);
+            return 1;
+        }
         return null;
     }
-    public Message deleteMessageWithId(int id) {
-        return null;
-    }
-    public Message updateMessageWithId(Message m, int id) {
+    public Integer updateMessageWithId(String mt, int id) {
+        if (messageRepository.existsById(id)) {
+            Message m = messageRepository.getById(id);
+            m.setMessageText(mt);
+            messageRepository.save(m);
+            return 1;
+        }
         return null;
     }
     public List<Message> getMessagesFromAccount(int id) {
-        return null;
+        return messageRepository.findByPostedBy(id);
     }
 }
