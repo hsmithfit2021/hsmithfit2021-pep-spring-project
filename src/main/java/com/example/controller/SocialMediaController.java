@@ -105,3 +105,4 @@ public class SocialMediaController {
         return ResponseEntity.status(200).body(messageService.getMessagesFromAccount(accountId));
     }
 }
+
